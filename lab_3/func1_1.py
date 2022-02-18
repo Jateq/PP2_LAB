@@ -1,4 +1,4 @@
-def converter(grams):
+def koni(grams):
     return 28.3495231 * grams
 n = int(input())
-print(converter(n))
+print(koni(n))

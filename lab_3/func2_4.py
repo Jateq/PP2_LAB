@@ -1,6 +1,4 @@
 
-from ast import Return
-
 
 movies = [
 {
@@ -79,9 +77,11 @@ movies = [
 "category": "Romance"
 }
 ]
-def av(jonas):
-    for i in movies:
-        for x, y in i.items():
-            sum += i['imdb']
-    return sum/len*(movies)
-print(av(input()))
+
+def average(movies):
+    sum = 0
+    for i in range(len(movies)):
+        sum += movies[i]['imdb']
+    print(sum/len(movies))
+
+average(movies)
