@@ -1,17 +1,11 @@
-strings = input()
-lst = strings.split()
-current = 0
-ok = False
-l = len(lst) - 1
-for i in range(len(lst)):
-    if i > current:
-        ok = False
-        break
-    if lst[i] + i > current:
-        current = lst[i]+i
-    if current >= l:
+s = list(map(int,input().split()))
+jmps = 0
+for i in range(len(s)):
+    if jmps >= len(s)-1:
         print(1)
-        ok = True
-        break
-if ok == False:
-    print(0)
+        exit()
+    if jmps < i:
+        print(0)
+        exit()
+    if jmps < s[i] + i:
+        jmps = s[i] + i
