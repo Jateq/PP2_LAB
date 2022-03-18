@@ -18,4 +18,4 @@ if os.path.isdir(path):
     for i in os.listdir(path):
 
         if os.path.isfile(path + "\\"+ i):print(i)
-else: print('No match')
+else: print('No match')# almaty
