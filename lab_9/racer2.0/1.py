@@ -71,8 +71,8 @@ class Coin(pygame.sprite.Sprite):
         self.surf = pygame.Surface((25,25), pygame.SRCALPHA)
         self.rect = self.surf.get_rect(center = (self.x, self.y))
 
-        # self.images = [pygame.image.load(f"./coin_images/c{i}.png") for i in range(1, 7)]
-        # self.anim_cnt = 0
+        self.images = [pygame.image.load(f"./coin_images/c{i}.png") for i in range(1, 7)]
+        self.anim_cnt = 0
     
     def move(self):
         self.rect.move_ip(0, self.speed)
@@ -86,9 +86,9 @@ class Coin(pygame.sprite.Sprite):
         if self.rect.top > HEIGHT:
             self.kill()
 
-    # def animate(self):
-        # self.anim_cnt += 1
-        # self.image = self.images[self.anim_cnt % len(self.images)]
+    def animate(self):
+        self.anim_cnt += 1
+        self.image = self.images[self.anim_cnt % len(self.images)]
 
 
 clock = pygame.time.Clock()
@@ -146,9 +146,9 @@ while not finished:
             FPS = 30
         if event.type == NOT_FAST:
             FPS = 30
-        # if event.type == FLIP:
-            # for coin in coins:
-                # coin.animate()
+        if event.type == FLIP:
+            for coin in coins:
+                coin.animate()
         
         
 
@@ -200,7 +200,10 @@ while not finished:
             coin.kill()
             SCORE += 1
             coins.add(Coin())
-    
+        if SCORE % 2 == 0 and pygame.sprite.collide_rect(p, coin):
+            coin.kill()
+            SCORE += 4
+            coins.add(Coin())
 
     for enemy in enemies:
         for enemy2 in enemies:
