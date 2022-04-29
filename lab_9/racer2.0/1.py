@@ -143,7 +143,7 @@ while not finished:
         
 
         if event.type == FAST:
-            FPS = 30
+            FPS = 60
         if event.type == NOT_FAST:
             FPS = 30
         if event.type == FLIP:
