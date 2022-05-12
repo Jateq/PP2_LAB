@@ -1,36 +1,33 @@
 import psycopg2
 
-namee = input('Enter name you need...\n')
+name = input('Enter username you need...\n')
 
 conn = psycopg2.connect(
     host = 'localhost',
     database = 'postgres',
-    port= 5432,
     user = 'postgres',
-    password = '12345'
+    password = 'Y3rbolat_tb'
 )
 
 cur = conn.cursor()
 
 '''
-create or replace function getRecord(namee text)
-    returns record as
+create or replace function record(name varchar)
+    returns record
+as
 $$
-    declare 
-        person record;
+declare
+    student record;
 begin
-    select * into person from PhoneBook1 where phonebook1.name = $1;
-    return person;
+    select * into student from phonebook where phonebook.username = $1;
+    return student;
 end; 
-$$
-LANGUAGE plpgsql;
+$$ language plpgsql;
 '''
 
-cur.execute("SELECT  getRecord( %s); ",(namee,))
+cur.execute("select record(%s); ",(name,))
 result = cur.fetchone()
 print(result)
-
-
 
 cur.close()
 conn.commit()

@@ -11,28 +11,19 @@ conn = psycopg2.connect(
 )
 cur = conn.cursor()
 
-
-
 '''
 do
 $$
-declare
-	per record;
-begin
-    for per in select * from phone_  where phone like '+7%' or phone like '8%'
-        loop
-            insert into phonebook(username, phone) values (per.username, per.phone);
-        end loop;
-
-end;  
-$$ 
+    declare
+        student record;
+    begin
+        for student in select * from phonebook limit 4
+            loop
+                raise notice 'username = %, phone = %', student.username, student.phone;
+            end loop;
+    end
+$$;
 '''
-cur.execute("select * from phone_ where phone like '+7%' and phone like '8%';")
+cur.execute("select * from phonebook limit 4")
 not_cor_data = cur.fetchall()
 print(not_cor_data)
-
-
-
-cur.close()
-conn.commit()
-conn.close()
